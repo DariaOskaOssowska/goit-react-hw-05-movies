@@ -1,28 +1,33 @@
 import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import SharedLayout from './SharedLayout';
+import { SharedLayout } from './SharedLayout/SharedLayout';
 
-const Home = lazy(() => import('../pages/Home'));
-const MovieSearch = lazy(() => import('../pages/MovieSearch/MovieSearch'));
-const MovieDetails = lazy(() => import('../pages/MovieDetails'));
-const CastMovie = lazy(() => import('../pages/CastMovie/CastMovie'));
-const ReviewsMovie = lazy(() => import('../pages/ReviewsMovie/ReviewsMovie'));
-const PageNotFoud = lazy(() => import('../pages/PageNotFound/PageNotFound'));
+
+// import { MovieDetailsPage } from 'pages/MovieDetailsPage';
+// import { Movies } from 'pages/Movies';
+// import { Cast } from './Cast/Cast';
+// import { Reviews } from './Reviews/Reviews';
+// import { NotFound } from 'pages/NotFound';
+
+const HomePage = lazy(() => import('../pages/HomePage'));
+const MovieDetailsPage = lazy(() => import('../pages/MovieDetailsPage'));
+const Movies = lazy(() => import('../pages/Movies'));
+const NotFound = lazy(() => import('../pages/NotFound'));
+const Cast = lazy(() => import('./Cast/Cast'));
+const Reviews = lazy(() => import('./Reviews/Reviews'));
 
 export const App = () => {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route index element={<Home />} />
-          <Route path="movies" element={<MovieSearch />} />
-          <Route path="movies/:movieId" element={<MovieDetails />}>
-            <Route path="cast" element={<CastMovie />} />
-            <Route path="reviews" element={<ReviewsMovie />} />
-          </Route>
-          <Route path="*" element={<PageNotFoud />} />
+    <Routes>
+      <Route path="/" element={<SharedLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path="movies" element={<Movies />} />
+        <Route path="movies/:movieId" element={<MovieDetailsPage />}>
+          <Route path="cast" element={<Cast />} />
+          <Route path="reviews" element={<Reviews />} />
         </Route>
-      </Routes>
-    </>
+      </Route>
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 };
