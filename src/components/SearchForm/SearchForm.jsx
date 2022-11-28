@@ -9,13 +9,13 @@ export const SearchForm = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleSubmit = e => {
-    setSearchParams({ movieTitle: e.target[0].value });
+    setSearchParams({ query: e.target[0].value });
     e.preventDefault();
     return;
   };
 
   useEffect(() => {
-    const movieTitle = searchParams.get('movieTitle');
+    const movieTitle = searchParams.get('query');
     if (movieTitle) {
       API.searchMovies(movieTitle).then(ret => setMovies(ret));
     }
